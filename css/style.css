@@ -1,0 +1,5 @@
+@import url('variables.css');
+
+body {
+    background: linear-gradient(var(--color--one), var(--color--one--rgba));
+}
