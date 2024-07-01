@@ -10,6 +10,11 @@ body {
     background: linear-gradient(var(--color--one), var(--color--one--rgba));
 }
 
+.main section{
+    display: flex;
+    justify-content: space-between;
+}
+
 .footer{
     grid-area: section__footer;
     display: grid;
