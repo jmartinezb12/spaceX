@@ -104,6 +104,7 @@ const getRocketsId = async(e)=>{
 
     await progressRocketWeight(Rocket);
     await progressPayloadWeights(Rocket);
+    await progressHeightRocket(Rocket);
 }
 
 export const paginationRockets = async()=>{

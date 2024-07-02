@@ -86,3 +86,25 @@ export const getRocketPayloadWeightsTotal  = async() =>{
     let [maxPayloadWeightsRocket] = data;
     return maxPayloadWeightsRocket;
 }
+
+export const getRocketHeightTotal  = async() =>{
+    let config = {
+        headers:{
+            "content-type": "application/json"
+        },
+        method: "POST",
+        body: JSON.stringify({
+            "options": {
+                "select": {
+                    "height": 1
+                },
+                "sort": {
+                    "height.meters": "desc"
+                }
+            }
+        })
+    }
+    let res = await fetch("https://api.spacexdata.com/v4/rockets/query", config);
+    let {docs:[{height} = maxHeightRocket]} = await res.json();
+    return height;
+}
