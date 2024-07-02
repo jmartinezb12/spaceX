@@ -1,9 +1,17 @@
-import { getAllRockets, getRocketById } from "../module/rockets.js";
+import { getAllRockets,
+     getRocketById } from "../module/rockets.js";
 import { imageRockets } from "./card.js";
 import { informRocketEngineThrustSeaLevel } from "./inform.js";
-import { informationFirstFlightRocket, informationLaunchCostRocket, informationRockets, informationWebRocket } from "./information.js";
-import { progressPayloadWeights, progressRocketWeight } from "./progressBar.js";
-import { tableRocketColum1, tableRocketColum2 } from "./tables.js";
+import { informationFirstFlightRocket,
+     informationLaunchCostRocket,
+     informationRockets,
+     informationWebRocket } from "./information.js";
+import { progressDiameterRocket,
+     progressHeightRocket,
+     progressPayloadWeights,
+     progressRocketWeight } from "./progressBar.js";
+import { tableRocketColum1,
+     tableRocketColum2 } from "./tables.js";
 import { nameRockets } from "./title.js";
 
 export const load = async()=>{
@@ -89,7 +97,8 @@ const getRocketsId = async(e)=>{
     let Rocket = await getRocketById(e.target.id);
     await clear();
 
-    await informationRockets(Rocket.country, Rocket.description)
+    await informationRockets(Rocket.country, Rocket.description);
+    progressDiameterRocket
     await nameRockets(Rocket.name);
     await informationLaunchCostRocket(Rocket.cost_per_launch);
     await informationFirstFlightRocket(Rocket.first_flight);
@@ -105,6 +114,7 @@ const getRocketsId = async(e)=>{
     await progressRocketWeight(Rocket);
     await progressPayloadWeights(Rocket);
     await progressHeightRocket(Rocket);
+    await progressDiameterRocket(Rocket);
 }
 
 export const paginationRockets = async()=>{
