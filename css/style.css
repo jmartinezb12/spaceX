@@ -30,6 +30,16 @@ body {
     text-transform: uppercase;
 }
 
+.load{
+    background: linear-gradient(120deg, #ffffff0e 30%, #ffffff23 38%, #f0f0f032 40%, #e5e5e50c 40%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    animation: load 2s infinite;
+    width: 100%;
+    margin: 12px 0;
+    height: 100px;
+}
+
 .footer{
     grid-area: section__footer;
     display: grid;
