@@ -1,3 +1,5 @@
+import { getAllRocketEngineTotal } from "../module/rockets.js";
+
 export const informRocketEngineThrustSeaLevel = async(thrust_sea_level)=>{
     let {kN:totalKN} = await getAllRocketEngineTotal();
     let pocentaje = (thrust_sea_level.kN * 100) / totalKN
