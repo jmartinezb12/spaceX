@@ -1,6 +1,7 @@
 :root{
     --color--one: #14162C;
     --color--one--rgba: #191b3fdf;
+    --color--five: #ffffff;
 }
 @font-face{
     font-family: "Roboto-Black";
