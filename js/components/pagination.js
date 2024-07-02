@@ -1,7 +1,7 @@
 import { getAllRockets, getRocketById } from "../module/rockets.js";
 import { imageRockets } from "./card.js";
 import { informRocketEngineThrustSeaLevel } from "./inform.js";
-import { informationLaunchCostRocket, informationRockets, informationWebRocket } from "./information.js";
+import { informationFirstFlightRocket, informationLaunchCostRocket, informationRockets, informationWebRocket } from "./information.js";
 import { tableRocketColum1, tableRocketColum2 } from "./tables.js";
 import { nameRockets } from "./title.js";
 
@@ -91,6 +91,7 @@ const getRocketsId = async(e)=>{
     await informationRockets(Rocket.country, Rocket.description)
     await nameRockets(Rocket.name);
     await informationLaunchCostRocket(Rocket.cost_per_launch);
+    await informationFirstFlightRocket(Rocket.first_flight);
     await informationWebRocket(Rocket.wikipedia);
 
     await informRocketEngineThrustSeaLevel(Rocket.engines.thrust_sea_level);
@@ -116,7 +117,7 @@ export const paginationRockets = async()=>{
     });
     
     let [a1,a2,a3,a4] = div.children
-    a3.click();
+    a1.click();
     return div;
 }
 
