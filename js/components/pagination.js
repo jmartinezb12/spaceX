@@ -1,9 +1,8 @@
-// import { getAllRockets, getRocketById } from "../../js/module/rockets.js";
-//import { getAllRockets, getRocketById } from "./../module/rockets.js";
 import { getAllRockets, getRocketById } from "../module/rockets.js";
 import { imageRockets } from "./card.js";
-import { informationRockets } from "./information.js";
-import { tableRocketColum2 } from "./tables.js";
+import { informRocketEngineThrustSeaLevel } from "./inform.js";
+import { informationLaunchCostRocket, informationRockets, informationWebRocket } from "./information.js";
+import { tableRocketColum1, tableRocketColum2 } from "./tables.js";
 import { nameRockets } from "./title.js";
 
 export const load = async()=>{
@@ -91,9 +90,13 @@ const getRocketsId = async(e)=>{
 
     await informationRockets(Rocket.country, Rocket.description)
     await nameRockets(Rocket.name);
+    await informationLaunchCostRocket(Rocket.cost_per_launch);
+    await informationWebRocket(Rocket.wikipedia);
 
+    await informRocketEngineThrustSeaLevel(Rocket.engines.thrust_sea_level);
     await imageRockets(Rocket.flickr_images);
 
+    await tableRocketColum1(Rocket);
     await tableRocketColum2(Rocket);
 }
 
