@@ -40,6 +40,12 @@ body {
     height: 100px;
 }
 
+@keyframes load{
+    100%{
+        background-position: -100% 0;
+    }
+}
+
 .footer{
     grid-area: section__footer;
     display: grid;
