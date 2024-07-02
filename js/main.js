@@ -1,5 +1,6 @@
 import { getAllRockets, getRocketById } from "./module/rockets.js";
-import { 
+import {
+    load, 
     paginationRockets
 } from "./components/pagination.js";
 
