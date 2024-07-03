@@ -30,3 +30,21 @@ export const imageCapsule = async (capsule) => {
     loadingElement.parentNode.replaceChild(imageElement, loadingElement);
   };
   
+  export const videoCapsule = async (videoId, containerSelector) => {
+    const videoContainer = Object.assign(document.createElement('div'), {
+      id: 'youtube-video',
+    });
+  
+    const iframe = Object.assign(document.createElement('iframe'), {
+      src: `https://www.youtube.com/embed/${videoId}?autoplay=0&controls=1&showinfo=0&modestbranding=1&loop=1`,
+      frameborder: '0',
+      allowfullscreen: true,
+    });
+  
+    videoContainer.appendChild(iframe);
+  
+    const descriptionItem = document.querySelector(containerSelector);
+    const loadingElement = descriptionItem.querySelector('.load');
+    descriptionItem.replaceChild(videoContainer, loadingElement);
+  };
+  

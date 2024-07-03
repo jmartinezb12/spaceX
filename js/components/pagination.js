@@ -2,7 +2,7 @@ import { getAllCapsules, getCapsuleById } from "../module/capsules.js";
 import { fetchData } from "../module/generic.js";
 import { getAllRockets,
      getRocketById } from "../module/rockets.js";
-import { imageCapsule, imageRockets } from "./card.js";
+import { imageCapsule, imageRockets, videoCapsule } from "./card.js";
 import { getCapsuleQuery } from "./filter.js";
 import { informRocketEngineThrustSeaLevel, informRocketEngineThrustVacuum } from "./inform.js";
 import { informationCapsule, informationFirstFlightRocket,
@@ -170,7 +170,6 @@ const getCapsulesId = async(event)=>{
     await informationWebCapsule(wikipedia, 'Wikipedia');
     const { launches: [{ links: { youtube_id } }] } = selectedCapsule[0];
     await videoCapsule(youtube_id, '#section__information__1');
-    
 }
 
 export const paginationCapsules = async(page=1, limit=4)=>{  
