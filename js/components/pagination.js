@@ -1,7 +1,7 @@
 import { getAllRockets,
      getRocketById } from "../module/rockets.js";
 import { imageRockets } from "./card.js";
-import { informRocketEngineThrustSeaLevel } from "./inform.js";
+import { informRocketEngineThrustSeaLevel, informRocketEngineThrustVacuum } from "./inform.js";
 import { informationFirstFlightRocket,
      informationLaunchCostRocket,
      informationRockets,
@@ -9,7 +9,8 @@ import { informationFirstFlightRocket,
 import { progressDiameterRocket,
      progressHeightRocket,
      progressPayloadWeights,
-     progressRocketWeight } from "./progressBar.js";
+     progressRocketWeight, 
+     progressSecondStageDiameterRocket} from "./progressBar.js";
 import { tableRocketColum1,
      tableRocketColum2 } from "./tables.js";
 import { nameRockets } from "./title.js";
@@ -115,6 +116,7 @@ const getRocketsId = async(e)=>{
     await progressPayloadWeights(Rocket);
     await progressHeightRocket(Rocket);
     await progressDiameterRocket(Rocket);
+    await progressSecondStageDiameterRocket(Rocket);
 }
 
 export const paginationRockets = async()=>{
