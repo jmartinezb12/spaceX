@@ -205,4 +205,73 @@ export const tableCapsuleColumn2 = async (capsule) => {
     });
   
     container.append(title, divider, tableContainer);
-};  
+};
+
+export const mainTableCompany = async (company) => {
+  const { headquarters } = company;
+
+  const container = document.createElement('div');
+  container.classList.add('description__container');
+  container.style.flexDirection = 'column';
+  container.style.alignItems = 'center';
+
+  const descriptionContainer = document.createElement('div');
+  descriptionContainer.classList.add('description__container2');
+  descriptionContainer.style.width = '80%';
+
+  const summaryTable = document.createElement('div');
+  summaryTable.classList.add('table__container__1');
+
+  const summaryContent = document.createElement('div');
+  const summaryText = document.createElement('strong');
+  summaryText.textContent = company.summary;
+  summaryText.style.textAlign = 'center';
+
+  summaryContent.appendChild(summaryText);
+  summaryTable.appendChild(summaryContent);
+
+  const headquartersTable = document.createElement('div');
+  headquartersTable.classList.add('information__table__1', 'bg__card');
+  headquartersTable.style.width = '30%';
+
+  const headquartersTableTitle = document.createElement('h3');
+  headquartersTableTitle.textContent = 'Headquarters';
+
+  const headquartersTableDivider = document.createElement('hr');
+
+  const headquartersTableRows = document.createElement('div');
+  headquartersTableRows.classList.add('table__container__1');
+
+  ['Address', 'City', 'State'].forEach((label) => {
+    const row = document.createElement('div');
+
+    const span = document.createElement('span');
+    span.textContent = label;
+
+    const strong = document.createElement('strong');
+    strong.textContent = headquarters[label.toLowerCase()];
+
+    row.appendChild(span);
+    row.appendChild(strong);
+    headquartersTableRows.appendChild(row);
+  });
+
+  headquartersTable.append(
+    headquartersTableTitle,
+    headquartersTableDivider,
+    headquartersTableRows
+  );
+
+  descriptionContainer.appendChild(summaryTable);
+  container.append(descriptionContainer, headquartersTable);
+
+  const descriptionItem = document.getElementById('section__information__1');
+  descriptionItem.style.flexDirection = 'column';
+  descriptionItem.innerHTML = '';
+  descriptionItem.appendChild(container);
+
+  const loadingElement = descriptionItem.querySelector('.load');
+  if (loadingElement) {
+    descriptionItem.replaceChild(container, loadingElement);
+  }
+};

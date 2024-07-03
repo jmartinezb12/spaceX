@@ -1,10 +1,10 @@
-import { getAllRockets, getRocketById } from "./module/rockets.js";
 import {
     load, 
     paginationCapsules, 
+    paginationCompany, 
     paginationRockets
 } from "./components/pagination.js";
-import { getAllCapsules } from "./module/capsules.js";
+import { getAllCompaniesInfo } from "./module/company-info.js";
 
 //console.table(await getAllRockets());
 //console.table(await getRocketById("5e9d0d95eda69955f709d1eb"));
@@ -53,4 +53,15 @@ capsules.addEventListener("click", async(e)=>{
     paginacion.append(await paginationCapsules())
 });
 
-capsules.click();
+let company = document.querySelector("#company")
+company.addEventListener("click", async(e)=>{
+    await footerSelect(e, company)
+    let paginacion = document.querySelector("#paginacion");
+    paginacion.innerHTML = ""
+    //paginacion.append(await paginationCapsules())
+    paginacion.append(await paginationCompany())
+});
+
+console.log(await getAllCompaniesInfo());
+
+company.click();

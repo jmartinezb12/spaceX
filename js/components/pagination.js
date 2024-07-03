@@ -1,4 +1,5 @@
 import { getAllCapsules, getCapsuleById } from "../module/capsules.js";
+import { getAllCompaniesInfo } from "../module/company-info.js";
 import { fetchData } from "../module/generic.js";
 import { getAllRockets,
      getRocketById } from "../module/rockets.js";
@@ -15,7 +16,7 @@ import { progressDiameterRocket,
      progressPayloadWeights,
      progressRocketWeight, 
      progressSecondStageDiameterRocket} from "./progressBar.js";
-import { tableCapsuleColumn1, tableCapsuleColumn2,tableRocketColum1,
+import { mainTableCompany, tableCapsuleColumn1, tableCapsuleColumn2,tableRocketColum1,
      tableRocketColum2 } from "./tables.js";
 import { mainTitle } from "./title.js";
 
@@ -200,3 +201,43 @@ export const paginationCapsules = async(page=1, limit=4)=>{
     paginationContainer.children[1].click();
     return paginationContainer;
 }
+
+export const paginationCompany = async () => {
+    const company = await getAllCompaniesInfo();
+  
+    const paginationContainer = Object.assign(document.createElement('div'), {
+      classList: ['buttom__paginacion'],
+    });
+  
+    const createPaginationLink = (label) => {
+      const link = Object.assign(document.createElement('a'), {
+        href: '#',
+        id: company.id,
+        textContent: label,
+        classList: ['pagination-link'],
+        onclick: (e) => {
+          for (const link of e.target.parentElement.children) {
+            link.classList.remove('activo');
+          }
+          e.target.classList.add('activo');
+        },
+      });
+      return link;
+    };
+  
+    paginationContainer.appendChild(createPaginationLink('1'));
+    paginationContainer.children[0].click();
+    
+    console.log(company.name);
+    await Promise.all([        
+        mainTitle(company.name),
+        mainTableCompany(company),
+        // informationCompany(company),
+        // informationCompany2(company),
+        // tableCompany1(company),
+        // tableCompany2(company),
+    ]);
+  
+    return paginationContainer;
+  };
+  
