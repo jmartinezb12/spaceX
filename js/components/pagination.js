@@ -173,44 +173,30 @@ const getCapsulesId = async(event)=>{
 }
 
 export const paginationCapsules = async(page=1, limit=4)=>{  
-     
-    let {docs, pagingCounter, totalPages, nextPage} = await getAllCapsules(page, limit);
+    const { docs, pagingCounter, totalPages, nextPage } = await getAlldata(pagination(page, limit), 'capsules');
 
-    let div = document.createElement("div");
-    div.classList.add("buttom__paginacion")
-
-    
-    let start = document.createElement("a");
-    start.setAttribute("href","#");
-    start.innerHTML = "&laquo";
-    start.setAttribute("data-page", (page==1) ? totalPages : page-1)
-    start.addEventListener("click", getCapsulesId)
-    div.appendChild(start);
-    docs.forEach((val,id) => {
-        let a = document.createElement("a");
-        a.setAttribute("href","#");
-        a.id = val.id;
-        a.textContent = pagingCounter;
-        a.addEventListener("click", getCapsulesId)
-        div.appendChild(a);
-        pagingCounter++
+    const paginationContainer = Object.assign(document.createElement('div'), {
+        classList: ['buttom__paginacion'],
     });
-    let end = document.createElement("a");
-    end.setAttribute("href","#");
-    end.innerHTML = "&raquo;";
-    end.setAttribute("data-page", (page && nextPage) ? page+1 : 1)
-    end.addEventListener("click", getCapsulesId)
-    div.appendChild(end);
-    console.log(div);
-    let [back, a1,a2,a3,a4, next] = div.children
-    a1.click();
-    // <div class="buttom__paginacion">
-    //     <a href="#">&laquo;</a> 
-    //     <a href="#" class="activo">1</a>
-    //     <a href="#">2</a>
-    //     <a href="#">3</a>
-    //     <a href="#">4</a>
-    //     <a href="#">&raquo;</a>
-    // </div>
-    return div;
+
+    const createPaginationLink = (label, pageNumber) => {
+        const link = Object.assign(document.createElement('a'), {
+        href: '#',
+        textContent: label,
+        dataset: { page: pageNumber },
+        onclick: getCapsulesId,
+        });
+        return link;
+    };
+
+    paginationContainer.append(
+        createPaginationLink('«', page === 1 ? totalPages : page - 1),
+        ...docs.map((capsule) =>
+        createPaginationLink(pagingCounter++, capsule.id)
+        ),
+        createPaginationLink('»', (page && nextPage) ? page + 1 : 1)
+    );
+
+    paginationContainer.children[1].click();
+    return paginationContainer;
 }
