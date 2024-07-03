@@ -6,7 +6,7 @@ import { getAllRockets,
 import { imageCapsule, imageRockets, videoCapsule } from "./card.js";
 import { getCapsuleQuery } from "./filter.js";
 import { informRocketEngineThrustSeaLevel, informRocketEngineThrustVacuum } from "./inform.js";
-import { informationCapsule, informationFirstFlightRocket,
+import { informationCapsule, informationCompany, informationFirstFlightRocket,
      informationLaunchCostRocket,
      informationRockets,
      informationWebCapsule,
@@ -232,7 +232,7 @@ export const paginationCompany = async () => {
     await Promise.all([        
         mainTitle(company.name),
         mainTableCompany(company),
-        // informationCompany(company),
+        informationCompany(company),
         // informationCompany2(company),
         // tableCompany1(company),
         // tableCompany2(company),

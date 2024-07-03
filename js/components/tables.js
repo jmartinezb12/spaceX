@@ -231,7 +231,7 @@ export const mainTableCompany = async (company) => {
   summaryTable.appendChild(summaryContent);
 
   const headquartersTable = document.createElement('div');
-  headquartersTable.classList.add('information__table__1', 'bg__card');
+  headquartersTable.classList.add('information__table__1');
   headquartersTable.style.width = '30%';
 
   const headquartersTableTitle = document.createElement('h3');

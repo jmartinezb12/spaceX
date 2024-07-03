@@ -173,4 +173,32 @@ export const informationWebCapsule = async (url, label) => {
 
   const loadingElement = document.querySelector('.load');
   loadingElement.parentNode.replaceChild(container, loadingElement);
-};  
+};
+
+export const informationCompany = async (company) => {
+  const descriptionItem = document.querySelector('#description__item');
+  descriptionItem.innerHTML = '';
+
+  const informationRows = [
+    { title: 'Founder', value: company.founder },
+    { title: 'Founded', value: company.founded },
+    { title: 'Employees', value: company.employees },
+    { title: 'Valuation', value: company.valuation },
+  ];
+
+  informationRows.forEach(({ title, value }) => {
+    const container = document.createElement('div');
+    container.classList.add('description__container');
+    container.style.padding = '15px';
+
+    const content = document.createElement('div');
+    const titleElement = document.createElement('h3');
+    titleElement.textContent = title;
+    const valueElement = document.createElement('small');
+    valueElement.textContent = value;
+    content.append(titleElement, valueElement);
+
+    container.append(content);
+    descriptionItem.appendChild(container);
+  });
+};
