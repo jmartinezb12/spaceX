@@ -1,8 +1,11 @@
-import { getRocketDiameterTotal, 
+import { 
+    getRocketDiameterTotal, 
     getRocketHeightTotal, 
     getRocketMassTotal, 
     getRocketPayloadWeightsTotal, 
-    getRocketSecondStageCompositeFairingDiameterTotal} from "../module/rockets.js";
+    getRocketSecondStageCompositeFairingDiameterTotal,
+    getRocketSecondStageCompositeFairingHeightTotal
+} from "../module/rockets.js";
 
 export const progressRocketWeight = async(Rockets)=>{
     let {kg} = await getRocketMassTotal();
