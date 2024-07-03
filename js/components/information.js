@@ -202,3 +202,45 @@ export const informationCompany = async (company) => {
     descriptionItem.appendChild(container);
   });
 };
+
+export const informationCompany2 = async (company) => {
+  const { links } = company;
+  const linksSection = document.getElementById('information__2');
+  linksSection.innerHTML = '';
+
+  const linkItems = [
+    { title: 'Website', text: 'Space X', url: links.website },
+    { title: 'Flickr', text: 'Official SpaceX Photos', url: links.flickr },
+    { title: 'Twitter', text: '@SpaceX', url: links.twitter },
+    { title: 'Elon Twitter', text: '@elonmusk', url: links.elon_twitter },
+  ];
+
+  linksSection.append(
+    ...linkItems.map(({ title, text, url }) => createLinkItem(title, text, url))
+  );
+};
+
+const createLinkItem = (title, text, url) => {
+  const linkContainer = document.createElement('div');
+  linkContainer.classList.add('description__container');
+  linkContainer.style.padding = '15px';
+  linkContainer.style.alignItems = 'center';
+
+  const linkContent = document.createElement('div');
+
+  const linkTitle = document.createElement('h3');
+  linkTitle.textContent = title;
+
+  const linkElement = document.createElement('a');
+  linkElement.href = url;
+
+  const linkText = document.createElement('small');
+  linkText.textContent = text;
+
+  linkElement.appendChild(linkText);
+  linkContent.appendChild(linkTitle);
+  linkContent.appendChild(linkElement);
+  linkContainer.appendChild(linkContent);
+
+  return linkContainer;
+};
