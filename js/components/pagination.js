@@ -8,6 +8,7 @@ import { informRocketEngineThrustSeaLevel, informRocketEngineThrustVacuum } from
 import { informationCapsule, informationFirstFlightRocket,
      informationLaunchCostRocket,
      informationRockets,
+     informationWebCapsule,
      informationWebRocket } from "./information.js";
 import { progressDiameterRocket,
      progressHeightRocket,

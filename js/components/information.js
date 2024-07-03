@@ -120,33 +120,32 @@ export const informationWebRocket = async(wikipedia)=>{
 }
 
 export const informationCapsule = async (lastUpdate) => {
-    const container = Object.assign(document.createElement('div'), {
-      classList: ['description__container'],
-      style: { alignItems: 'center' },
-    });
-  
-    const img = Object.assign(document.createElement('img'), {
-      src: 'storage/img/icons/mech.svg',
-    });
-  
-    const title = Object.assign(document.createElement('h3'), {
-      textContent: 'Last Update',
-    });
-  
-    const description = Object.assign(document.createElement('small'), {
-      textContent: lastUpdate || 'No information available',
-    });
-  
-    const infoContainer = Object.assign(document.createElement('div'), {
-      children: [title, description],
-    });
-  
-    container.append(img, infoContainer);
-  
-    const descriptionItem = document.getElementById('information__2');
-    const loadingElement = descriptionItem.querySelector('.load');
-    descriptionItem.replaceChild(container, loadingElement);
-  };
+  const container = Object.assign(document.createElement('div'), {
+    classList: ['description__container'],
+    style: { alignItems: 'center' },
+  });
+
+  const img = Object.assign(document.createElement('img'), {
+    src: 'storage/img/icons/mech.svg',
+  });
+
+  const title = Object.assign(document.createElement('h3'), {
+    textContent: 'Last Update',
+  });
+
+  const description = Object.assign(document.createElement('small'), {
+    textContent: lastUpdate || 'No information available',
+  });
+
+  const infoContainer = document.createElement('div');
+  infoContainer.append(title, description);
+
+  container.append(img, infoContainer);
+
+  const descriptionItem = document.getElementById('information__2');
+  const loadingElement = descriptionItem.querySelector('.load');
+  descriptionItem.replaceChild(container, loadingElement);
+};
   
   export const informationWebCapsule = async (url, label) => {
     const container = Object.assign(document.createElement('div'), {
@@ -167,13 +166,12 @@ export const informationCapsule = async (lastUpdate) => {
       textContent: label,
     });
   
-    const linkContainer = Object.assign(document.createElement('div'), {
-      children: [title, link],
-    });
+    const linkContainer = document.createElement('div');
+    linkContainer.append(title, link);
   
     container.append(img, linkContainer);
   
     const loadingElement = document.querySelector('.load');
     loadingElement.parentNode.replaceChild(container, loadingElement);
-  };
+  };  
   
