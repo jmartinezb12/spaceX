@@ -148,3 +148,32 @@ export const informationCapsule = async (lastUpdate) => {
     descriptionItem.replaceChild(container, loadingElement);
   };
   
+  export const informationWebCapsule = async (url, label) => {
+    const container = Object.assign(document.createElement('div'), {
+      classList: ['description__container'],
+    });
+  
+    const img = Object.assign(document.createElement('img'), {
+      src: 'storage/img/icons/mech.svg',
+    });
+  
+    const title = Object.assign(document.createElement('h3'), {
+      textContent: 'Learn more about the capsule and its launch',
+    });
+  
+    const link = Object.assign(document.createElement('a'), {
+      href: url,
+      target: '_blank',
+      textContent: label,
+    });
+  
+    const linkContainer = Object.assign(document.createElement('div'), {
+      children: [title, link],
+    });
+  
+    container.append(img, linkContainer);
+  
+    const loadingElement = document.querySelector('.load');
+    loadingElement.parentNode.replaceChild(container, loadingElement);
+  };
+  
