@@ -15,7 +15,7 @@ import { progressDiameterRocket,
      progressPayloadWeights,
      progressRocketWeight, 
      progressSecondStageDiameterRocket} from "./progressBar.js";
-import { mainTableCompany, tableCapsuleColumn1, tableCapsuleColumn2,tableCompany1,tableRocketColum1,
+import { mainTableCompany, tableCapsuleColumn1, tableCapsuleColumn2,tableCompany1,tableCompany2,tableRocketColum1,
      tableRocketColum2 } from "./tables.js";
 import { mainTitle } from "./title.js";
 
@@ -234,7 +234,7 @@ export const paginationCompany = async () => {
         informationCompany(company),
         informationCompany2(company),
         tableCompany1(company),
-        // tableCompany2(company),
+        tableCompany2(company),
     ]);
   
     return paginationContainer;

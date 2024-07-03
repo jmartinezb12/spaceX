@@ -307,3 +307,31 @@ export const tableCompany1 = async(company) => {
   });
 };
 
+export const tableCompany2 = async (company) => {
+  const container = document.querySelector("#information__table__2");
+  container.innerHTML = "";
+
+  const createElement = (tag, text = '', className = '') => {
+      const element = document.createElement(tag);
+      if (text) element.textContent = text;
+      if (className) element.classList.add(className);
+      return element;
+  };
+
+  container.append(createElement("h3", "Company Installation"), createElement("hr"));
+
+  const tableContainer = createElement("div", '', "table__container__1");
+
+  const rows = [
+      { label: "Launch Sites", value: company.launch_sites },
+      { label: "Test Sites", value: company.test_sites }
+  ];
+
+  rows.forEach(({ label, value }) => {
+      const rowElement = createElement("div");
+      rowElement.append(createElement("span", label), createElement("strong", value));
+      tableContainer.append(rowElement);
+  });
+
+  container.append(tableContainer);
+};
