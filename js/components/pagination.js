@@ -1,4 +1,3 @@
-import { getAllCapsules, getCapsuleById } from "../module/capsules.js";
 import { getAllCompaniesInfo } from "../module/company-info.js";
 import { fetchData } from "../module/generic.js";
 import { getAllRockets,
@@ -16,7 +15,7 @@ import { progressDiameterRocket,
      progressPayloadWeights,
      progressRocketWeight, 
      progressSecondStageDiameterRocket} from "./progressBar.js";
-import { mainTableCompany, tableCapsuleColumn1, tableCapsuleColumn2,tableRocketColum1,
+import { mainTableCompany, tableCapsuleColumn1, tableCapsuleColumn2,tableCompany1,tableRocketColum1,
      tableRocketColum2 } from "./tables.js";
 import { mainTitle } from "./title.js";
 
@@ -234,7 +233,7 @@ export const paginationCompany = async () => {
         mainTableCompany(company),
         informationCompany(company),
         informationCompany2(company),
-        // tableCompany1(company),
+        tableCompany1(company),
         // tableCompany2(company),
     ]);
   

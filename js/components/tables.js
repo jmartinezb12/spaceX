@@ -275,3 +275,35 @@ export const mainTableCompany = async (company) => {
     descriptionItem.replaceChild(container, loadingElement);
   }
 };
+
+export const tableCompany1 = async(company) => {
+  const container = document.querySelector("#information__table__1");
+  container.innerHTML = "";
+
+  const createAndAppendElement = (tag, text, parent, className) => {
+      const element = document.createElement(tag);
+      if (text) element.textContent = text;
+      if (className) element.classList.add(className);
+      parent.appendChild(element);
+      return element;
+  };
+
+  createAndAppendElement("h3", "Company Information", container);
+  createAndAppendElement("hr", null, container);
+
+  const tableContainer = createAndAppendElement("div", null, container, "table__container__1");
+
+  const rows = [
+      { label: "CEO", value: company.ceo },
+      { label: "CTO", value: company.cto },
+      { label: "COO", value: company.coo },
+      { label: "CTO Propulsion", value: company.cto_propulsion }
+  ];
+
+  rows.forEach(({ label, value }) => {
+      const rowElement = createAndAppendElement("div", null, tableContainer);
+      createAndAppendElement("span", label, rowElement);
+      createAndAppendElement("strong", value, rowElement);
+  });
+};
+
