@@ -1,8 +1,10 @@
 import { getAllRockets, getRocketById } from "./module/rockets.js";
 import {
     load, 
+    paginationCapsules, 
     paginationRockets
 } from "./components/pagination.js";
+import { getAllCapsules } from "./module/capsules.js";
 
 //console.table(await getAllRockets());
 //console.table(await getRocketById("5e9d0d95eda69955f709d1eb"));
@@ -51,4 +53,4 @@ capsules.addEventListener("click", async(e)=>{
     paginacion.append(await paginationCapsules())
 });
 
-rocket.click();
+capsules.click();

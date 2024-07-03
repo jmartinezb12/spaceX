@@ -1,8 +1,11 @@
+import { getAllCapsules, getCapsuleById } from "../module/capsules.js";
+import { fetchData } from "../module/generic.js";
 import { getAllRockets,
      getRocketById } from "../module/rockets.js";
-import { imageRockets } from "./card.js";
+import { imageCapsule, imageRockets } from "./card.js";
+import { getCapsuleQuery } from "./filter.js";
 import { informRocketEngineThrustSeaLevel, informRocketEngineThrustVacuum } from "./inform.js";
-import { informationFirstFlightRocket,
+import { informationCapsule, informationFirstFlightRocket,
      informationLaunchCostRocket,
      informationRockets,
      informationWebRocket } from "./information.js";
@@ -11,9 +14,9 @@ import { progressDiameterRocket,
      progressPayloadWeights,
      progressRocketWeight, 
      progressSecondStageDiameterRocket} from "./progressBar.js";
-import { tableRocketColum1,
+import { tableCapsuleColumn1, tableCapsuleColumn2,tableRocketColum1,
      tableRocketColum2 } from "./tables.js";
-import { nameRockets } from "./title.js";
+import { mainTitle } from "./title.js";
 
 export const load = async()=>{
     let header__title = document.querySelector("#header__title");
@@ -99,8 +102,7 @@ const getRocketsId = async(e)=>{
     await clear();
 
     await informationRockets(Rocket.country, Rocket.description);
-    progressDiameterRocket
-    await nameRockets(Rocket.name);
+    await mainTitle(Rocket.name);
     await informationLaunchCostRocket(Rocket.cost_per_launch);
     await informationFirstFlightRocket(Rocket.first_flight);
     await informationWebRocket(Rocket.wikipedia);
@@ -138,30 +140,41 @@ export const paginationRockets = async()=>{
     return div;
 }
 
-const getCapsulesId = async(e)=>{
-    e.preventDefault();
-    if(e.target.dataset.page){
-        let paginacion = document.querySelector("#paginacion");
-        paginacion.innerHTML = ""
-        paginacion.append(await paginationCapsules(Number(e.target.dataset.page)))
+const getCapsulesId = async(event)=>{
+    if (event.target.dataset.page) {
+        const paginationContainer = document.querySelector('#paginacion');
+        paginationContainer.innerHTML = '';
+        paginationContainer.appendChild(await paginationCapsules(Number(event.target.dataset.page)));
     }
-    let a = e.target.parentElement.children;
-    for(let val of a){
-        val.classList.remove('activo');
+    const capsuleItems = event.target.parentElement.children;
+    for (const item of capsuleItems) {
+        item.classList.remove('activo');
     }
-    e.target.classList.add('activo');
+    event.target.classList.add('activo');
+    const selectedCapsuleId = event.target.id;
     
-
-    // let Rocket = await getAllRocketsId(e.target.id);
-    // console.log(Rocket);
-
-    // await informationRockets(Rocket.country, Rocket.description)
+    const capsuleData = await fetchData(getCapsuleQuery(selectedCapsuleId), 'capsules');
+    const { docs: selectedCapsule } = capsuleData;
+    await load();
+    await mainTitle(selectedCapsule[0].serial);
+    await tableCapsuleColumn1(selectedCapsule[0]);
+    await tableCapsuleColumn2(selectedCapsule[0]);
+    await imageCapsule(selectedCapsule[0]);
+    await informationCapsule(selectedCapsule[0].last_update);
+    const { launches: [{ links: { webcast } }] } = selectedCapsule[0];
+    await informationWebCapsule(webcast, 'Youtube');
+    const { launches: [{ links: { presskit } }] } = selectedCapsule[0];
+    await informationWebCapsule(presskit, 'SpaceX');
+    const { launches: [{ links: { wikipedia } }] } = selectedCapsule[0];
+    await informationWebCapsule(wikipedia, 'Wikipedia');
+    const { launches: [{ links: { youtube_id } }] } = selectedCapsule[0];
+    await videoCapsule(youtube_id, '#section__information__1');
     
 }
 
 export const paginationCapsules = async(page=1, limit=4)=>{  
      
-    let {docs, pagingCounter, totalPages, nextPage} = await getAllCapsules(page, limit)
+    let {docs, pagingCounter, totalPages, nextPage} = await getAllCapsules(page, limit);
 
     let div = document.createElement("div");
     div.classList.add("buttom__paginacion")

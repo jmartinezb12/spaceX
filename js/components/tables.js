@@ -143,3 +143,66 @@ export const tableRocketColum2 = async (Rocket)=>{
         
     // </div>
 }
+export const tableCapsuleColumn1 = async (capsule) => {
+    const container = document.querySelector('#information__table__1');
+    container.innerHTML = '';
+  
+    const title = Object.assign(document.createElement('h3'), {
+      textContent: 'Capsule Information',
+    });
+  
+    const divider = Object.assign(document.createElement('hr'), {});
+  
+    const tableContainer = Object.assign(document.createElement('div'), {
+      classList: ['table__container__1'],
+    });
+  
+    ['Status', 'Type', 'Reuse Count'].forEach((label) => {
+      const row = document.createElement('div');
+  
+      const labelElement = Object.assign(document.createElement('span'), {
+        textContent: label,
+      });
+  
+      const valueElement = Object.assign(document.createElement('strong'), {
+        textContent: capsule[label.toLowerCase().replace(' ', '_')],
+      });
+  
+      row.append(labelElement, valueElement);
+      tableContainer.appendChild(row);
+    });
+  
+    container.append(title, divider, tableContainer);
+  };
+
+export const tableCapsuleColumn2 = async (capsule) => {
+    const container = document.querySelector('#information__table__2');
+    container.innerHTML = '';
+  
+    const title = Object.assign(document.createElement('h3'), {
+      textContent: 'Capsule Landing Information',
+    });
+  
+    const divider = Object.assign(document.createElement('hr'), {});
+  
+    const tableContainer = Object.assign(document.createElement('div'), {
+      classList: ['table__container__1'],
+    });
+  
+    ['Water Landings', 'Land Landings'].forEach((label) => {
+      const row = document.createElement('div');
+  
+      const labelElement = Object.assign(document.createElement('span'), {
+        textContent: label,
+      });
+  
+      const valueElement = Object.assign(document.createElement('strong'), {
+        textContent: capsule[label.toLowerCase().replace(' ', '_')],
+      });
+  
+      row.append(labelElement, valueElement);
+      tableContainer.appendChild(row);
+    });
+  
+    container.append(title, divider, tableContainer);
+};  

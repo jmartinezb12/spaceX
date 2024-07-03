@@ -118,3 +118,33 @@ export const informationWebRocket = async(wikipedia)=>{
     //     </div>
     // </div>
 }
+
+export const informationCapsule = async (lastUpdate) => {
+    const container = Object.assign(document.createElement('div'), {
+      classList: ['description__container'],
+      style: { alignItems: 'center' },
+    });
+  
+    const img = Object.assign(document.createElement('img'), {
+      src: 'storage/img/icons/mech.svg',
+    });
+  
+    const title = Object.assign(document.createElement('h3'), {
+      textContent: 'Last Update',
+    });
+  
+    const description = Object.assign(document.createElement('small'), {
+      textContent: lastUpdate || 'No information available',
+    });
+  
+    const infoContainer = Object.assign(document.createElement('div'), {
+      children: [title, description],
+    });
+  
+    container.append(img, infoContainer);
+  
+    const descriptionItem = document.getElementById('information__2');
+    const loadingElement = descriptionItem.querySelector('.load');
+    descriptionItem.replaceChild(container, loadingElement);
+  };
+  
