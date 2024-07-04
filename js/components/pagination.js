@@ -143,68 +143,76 @@ export const paginationRockets = async()=>{
     return div;
 }
 
-const getCapsulesId = async (event) => {
-    if (event.target.dataset.page) {
-        let paginationContainer = document.querySelector('#paginacion');
-        paginationContainer.innerHTML = '';
-        paginationContainer.append(await paginationCapsules(Number(event.target.dataset.page)));
-    }
-    
-    let links = event.target.parentElement.children;
-    for (let link of links) {
-        link.classList.remove('activo');
-    }
-    event.target.classList.add('activo');
-  
-    let selectedCapsuleId = event.target.id;
+const getCapsulesId = async (e) => {
+  e.preventDefault();
 
-    let capsuleData = await fetchData(getCapsuleQuery(selectedCapsuleId), 'capsules');
-    let { docs: capsules } = capsuleData;
-    console.log(capsuleData)
-    await load();
-    await mainTitle(capsules[0].serial);
-    await tableCapsuleColumn1(capsules[0]);
-    await tableCapsuleColumn2(capsules[0]);
-    await imageCapsule(capsules[0]);
-    await informationCapsule(capsules[0].last_update);
-  
-    const { launches: [{ links: { webcast } }] } = capsules[0];
-    await informationWebCapsule(webcast, 'Youtube');
-  
-    const { launches: [{ links: { presskit } }] } = capsules[0];
-    await informationWebCapsule(presskit, 'SpaceX');
-  
-    const { launches: [{ links: { wikipedia } }] } = capsules[0];
-    await informationWebCapsule(wikipedia, 'Wikipedia');
-  
-    const { launches: [{ links: { youtube_id } }] } = capsules[0];
-    await videoCapsule(youtube_id, '#section__information__1');
-  };  
+  if (e.target.dataset.page) {
+    let paginationContainer = document.querySelector("#paginacion");
+    paginationContainer.innerHTML = "";
+    paginationContainer.append(await paginationCapsules(Number(e.target.dataset.page)));
+  }
+
+  const parentElement = e.target.parentElement;
+  if (parentElement) {
+    let siblings = parentElement.children;
+    Array.from(siblings).forEach(sibling => sibling.classList.remove('activo'));
+  }
+
+  e.target.classList.add('activo');
+
+  let id = e.target.id;
+  let { docs: [capsule] } = await fetchData(getCapsuleQuery(id), "capsules");
+
+  await load();
+  await mainTitle(capsule.serial);
+  await tableCapsuleColumn1(capsule);
+  await tableCapsuleColumn2(capsule);
+  await imageCapsule(capsule);
+  await informationCapsule(capsule.last_update);
+
+  const { launches: [{ links: { webcast } }] } = capsule;
+  await informationWebCapsule(webcast, 'Youtube');
+
+  const { launches: [{ links: { presskit } }] } = capsule;
+  await informationWebCapsule(presskit, 'SpaceX');
+
+  const { launches: [{ links: { wikipedia } }] } = capsule;
+  await informationWebCapsule(wikipedia, 'Wikipedia');
+
+  const { launches: [{ links: { youtube_id } }] } = capsule;
+  await videoCapsule(youtube_id, '#section__information__1');
+};  
 
 export const paginationCapsules = async (page = 1, limit = 4) => {
   let { docs, pagingCounter, totalPages, nextPage } = await fetchData(buildPaginationOptions(page, limit),"capsules");
+  //console.log(await fetchData(buildPaginationOptions(page, limit),"capsules"));
   let paginationContainer = document.createElement('div');
   paginationContainer.classList.add('buttom__paginacion');
   
-    let createPaginationLink = (label, pageNumber) => {
-      let link = document.createElement('a');
-      link.href = '#';
-      link.textContent = label;
-      link.dataset.page = pageNumber;
-      link.onclick = getCapsulesId;
-      return link;
-    };
-  
-    paginationContainer.append(
-      createPaginationLink('«', page === 1 ? totalPages : page - 1),
-      ...docs.map((capsule) =>
-        createPaginationLink(pagingCounter++, capsule.id)
-      ),
-      createPaginationLink('»', (page && nextPage) ? page + 1 : 1)
-    );
-    
-  paginationContainer.children[1].click();
-  return paginationContainer;
+  const createNavLink = (content, pageNum, clickHandler) => {
+    const link = document.createElement("a");
+    link.href = "#";
+    link.innerHTML = content;
+    link.dataset.page = pageNum;
+    link.addEventListener("click", clickHandler);
+    return link;
+  };
+
+  const container = document.createElement("div");
+  container.classList.add("buttom__paginacion");
+
+  container.appendChild(createNavLink("&laquo", page === 1 ? totalPages : page - 1, getCapsulesId));
+
+  docs.forEach(doc => {
+    const link = createNavLink(pagingCounter++, doc.id, getCapsulesId);
+    container.appendChild(link);
+  });
+
+  container.appendChild(createNavLink("&raquo;", nextPage || 1, getCapsulesId));
+
+  container.children[1].click();
+
+  return container;
 };  
 
 export const paginationCompany = async () => {

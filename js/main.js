@@ -1,3 +1,4 @@
+import { buildPaginationOptions } from "./components/filter.js";
 import {
     load, 
     paginationCapsules, 
@@ -8,6 +9,7 @@ import {
 } from "./components/pagination.js";
 import { getAllCompaniesInfo } from "./module/company-info.js";
 import { getAllCores } from "./module/cores.js";
+import { fetchData } from "./module/generic.js";
 
 let footerSelect = async(e, id)=>{
     e.preventDefault();
@@ -29,13 +31,13 @@ rocket.addEventListener("click", async(e)=>{
     paginacion.append(await paginationRockets())
 });
 
-// let capsules = document.querySelector("#capsules")
-// capsules.addEventListener("click", async(e)=>{
-//     await footerSelect(e, capsules)
-//     let paginacion = document.querySelector("#paginacion");
-//     paginacion.innerHTML = ""
-//     paginacion.append(await paginationCapsules())
-// });
+let capsules = document.querySelector("#capsules")
+capsules.addEventListener("click", async(e)=>{
+    await footerSelect(e, capsules)
+    let paginacion = document.querySelector("#paginacion");
+    paginacion.innerHTML = ""
+    paginacion.append(await paginationCapsules())
+});
 
 let company = document.querySelector("#company")
 company.addEventListener("click", async(e)=>{
@@ -67,4 +69,5 @@ company.addEventListener("click", async(e)=>{
 console.log(await getAllCompaniesInfo());
 console.log(await getAllCores());
 
+console.log(await fetchData(buildPaginationOptions(1, 4),"capsules"));
 company.click();
