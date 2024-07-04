@@ -48,3 +48,33 @@ export const imageCapsule = async (capsule) => {
     descriptionItem.replaceChild(videoContainer, loadingElement);
   };
   
+  export const imageCrew = async (crew) => {    
+    const { image } = crew;
+    const sectionImage = document.querySelector("#section__image");
+    sectionImage.style.height = "260px";
+    sectionImage.style.display = "block";
+
+    const createDivWithImage = (src) => {
+        const div = document.createElement("div");
+        div.classList.add("carousel__item");
+        div.style.margin = "10px 0";
+
+        const img = document.createElement("img");
+        img.src = src;
+        img.referrerPolicy = "no-referrer";
+        img.style.width = "250px";
+        img.style.height = "250px";
+
+        div.appendChild(img);
+        return div;
+    };
+
+    const div = createDivWithImage(image);
+    const loadElement = sectionImage.querySelector("div.load");
+
+    if (loadElement) {
+        loadElement.parentNode.replaceChild(div, loadElement);
+    } else {
+        sectionImage.appendChild(div);
+    }
+};

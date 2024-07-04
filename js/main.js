@@ -2,28 +2,12 @@ import {
     load, 
     paginationCapsules, 
     paginationCompany, 
+    //paginationLaunches, 
+    //paginationCrew, 
     paginationRockets
 } from "./components/pagination.js";
 import { getAllCompaniesInfo } from "./module/company-info.js";
-
-//console.table(await getAllRockets());
-//console.table(await getRocketById("5e9d0d95eda69955f709d1eb"));
-const headerRockets = document.querySelector(".header");
-const mainOverview = document.querySelector(".main__overview");
-const mainDescriptionLeft = document.querySelector(".main__description__left");
-// document.addEventListener("DOMContentLoaded",  async()=>{
-//     const params = new URLSearchParams(location.search);
-    
-//     let receivedAllRocket = await getAllRockets();
-//     let loadImageInnerMainOverview = '';
-//     console.log(receivedAllRocket);
-//     headerRockets.innerHTML = `<h1>${receivedAllRocket[0].name}</h1>`;
-//     //mainDescriptionLeft.innerHTML = 
-//     // receivedAllRocket[0].flickr_images.forEach(individualImage => {
-//     //     loadImageInnerMainOverview += `<img src="${individualImage}" alt="" referrerpolicy="no-referrer">`
-//     // });
-//     //mainOverview.innerHTML = loadImageInnerMainOverview;
-// });
+import { getAllCores } from "./module/cores.js";
 
 let footerSelect = async(e, id)=>{
     e.preventDefault();
@@ -45,13 +29,13 @@ rocket.addEventListener("click", async(e)=>{
     paginacion.append(await paginationRockets())
 });
 
-let capsules = document.querySelector("#capsules")
-capsules.addEventListener("click", async(e)=>{
-    await footerSelect(e, capsules)
-    let paginacion = document.querySelector("#paginacion");
-    paginacion.innerHTML = ""
-    paginacion.append(await paginationCapsules())
-});
+// let capsules = document.querySelector("#capsules")
+// capsules.addEventListener("click", async(e)=>{
+//     await footerSelect(e, capsules)
+//     let paginacion = document.querySelector("#paginacion");
+//     paginacion.innerHTML = ""
+//     paginacion.append(await paginationCapsules())
+// });
 
 let company = document.querySelector("#company")
 company.addEventListener("click", async(e)=>{
@@ -62,6 +46,25 @@ company.addEventListener("click", async(e)=>{
     paginacion.append(await paginationCompany())
 });
 
+// let launches = document.querySelector("#launches")
+// launches.addEventListener("click", async(e)=>{
+//     await footerSelect(e, launches)
+//     let paginacion = document.querySelector("#paginacion");
+//     paginacion.innerHTML = ""
+//     //paginacion.append(await paginationCapsules())
+//     paginacion.append(await paginationLaunches());
+// });
+
+// let crew = document.querySelector("#crew")
+// crew.addEventListener("click", async(e)=>{
+//     await footerSelect(e, crew)
+//     let paginacion = document.querySelector("#paginacion");
+//     paginacion.innerHTML = ""
+//     //paginacion.append(await paginationCapsules())
+//     paginacion.append(await paginationCrew());
+// });
+
 console.log(await getAllCompaniesInfo());
+console.log(await getAllCores());
 
 company.click();

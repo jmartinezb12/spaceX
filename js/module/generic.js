@@ -1,13 +1,11 @@
-export const fetchData = (query, endpoint) => (
-    fetch(`https://api.spacexdata.com/v4/${endpoint}/query`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(query),
-    })
-      .then(response => response.json())
-      .then(data => data)
-      .catch(error => console.error('Error fetching data:', error))
-  );
-  
+export const fetchData = async (queryOptions, endpoint) => {
+  const apiUrl = `https://api.spacexdata.com/v4/${endpoint}/query`;
+  let fetchConfig = {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(queryOptions)
+  };
+
+  let response = await fetch(apiUrl, fetchConfig);
+  return await response.json();
+};
