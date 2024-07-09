@@ -1,4 +1,4 @@
-**# Réplica de SpaceX
+**# Réplica de SpaceX**
 
 ## Introducción
 
@@ -73,4 +73,65 @@ Si deseas contribuir a este proyecto, por favor, sigue estos pasos:
 ## Autor
 
 Este proyecto fue creado por Jahir Daniel Martinez Bayona el 25-06-2024.**
+# SpaceX Replica Application
+
+Esta es una aplicación réplica de la agencia espacial SpaceX, que permite visualizar información relacionada con todos los elementos existentes dentro de la compañía mediante el consumo de su API oficial.
+
+## Descripción
+
+- La aplicación muestra información detallada sobre SpaceX utilizando datos obtenidos de la API oficial de SpaceX.
+- Actualmente, la aplicación presenta información sobre Rockets y Company.
+- Toda la información es visualizada a través de un frontend desarrollado con JavaScript básico, CSS y HTML, sin utilizar ningún framework.
+
+## API
+
+- La información se obtiene de la API oficial de SpaceX: [https://api.spacexdata.com/v4/](https://api.spacexdata.com/v4/)
+- Endpoints principales utilizados:
+  - Rockets: [https://api.spacexdata.com/v4/rockets](https://api.spacexdata.com/v4/rockets)
+  - Company: [https://api.spacexdata.com/v4/company](https://api.spacexdata.com/v4/company)
+
+## Información de SpaceX
+
+La API de SpaceX proporciona datos sobre los siguientes elementos:
+
+- Company (Compañía)
+- Rockets (Cohetes)
+- Capsules (Cápsulas)
+- Starlinks
+- Landing Pads (Plataformas de Aterrizaje)
+- Launches (Lanzamientos)
+- Crew (Tripulación)
+- Dragon
+- History (Historia)
+- Roadster
+- Payloads (Cargas Útiles)
+- Launchpads (Plataformas de Lanzamiento)
+
+## Tecnologías Utilizadas
+
+- **JavaScript**: Para la lógica y manejo de datos.
+- **CSS**: Para el diseño y estilos.
+- **HTML**: Para la estructura del contenido.
+
+## Cómo Ejecutar
+
+1. Clona el repositorio en tu máquina local.
+2. Abre el archivo `index.html` en tu navegador web.
+3. Explora la información sobre SpaceX directamente desde la interfaz de usuario.
+
+¡Disfruta explorando los datos de SpaceX!
+
+## Contribuciones
+
+Las contribuciones son bienvenidas. Siéntete libre de hacer un fork del repositorio y enviar un pull request con tus mejoras.
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT.
+
+## Reporte de Actualización
+
+**Fecha de Actualización**: 09 de Julio de 2024
+
+Este documento ha sido actualizado para reflejar la fecha de hoy.
 
