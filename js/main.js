@@ -70,4 +70,4 @@ console.log(await getAllCompaniesInfo());
 console.log(await getAllCores());
 
 console.log(await fetchData(buildPaginationOptions(1, 4),"capsules"));
-company.click();
+rocket.click();
